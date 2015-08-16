@@ -344,8 +344,10 @@ void L1TrackProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       const TTStub<Ref_PixelDigi_>* stub=iterTTStub;
 
       double stubPt = theStackedGeometry->findRoughPt(mMagneticFieldStrength,stub);
-      
+
       if (stubPt>10000.0) stubPt=9999.99;
+
+      double stubBend = stub->getTriggerBend();
 
       StackedTrackerDetId stubDetId = stub->getDetId();
       unsigned int iStack = stubDetId.iLayer();
@@ -426,7 +428,7 @@ void L1TrackProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	}    
       }    
 
-      if (ev.addStub(iStack,iPhi+1,iZ,stubPt,
+      if (ev.addStub(iStack,iPhi+1,iZ,stubPt,stubBend,
 		 stubPosition.x(),stubPosition.y(),stubPosition.z(),
 		     innerStack,irphi,iz,iladder,imodule)) {
 

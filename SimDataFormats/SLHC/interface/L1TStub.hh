@@ -19,7 +19,7 @@ public:
   }
 
   L1TStub(int simtrackid, int iphi, int iz, int layer, int ladder, int module, 
-	  double x, double y, double z, double sigmax, double sigmaz, double pt){
+	  double x, double y, double z, double sigmax, double sigmaz, double pt, double bend){
     simtrackid_=simtrackid;
     iphi_=iphi;
     iz_=iz;
@@ -32,6 +32,7 @@ public:
     sigmax_=sigmax;
     sigmaz_=sigmaz;
     pt_=pt;
+    bend_ = bend;
 
   }
 
@@ -64,7 +65,8 @@ public:
 	<< pt_ << "\t" 
 	<< x_ << "\t" 
 	<< y_ << "\t" 
-	<< z_ << "\t" << endl; 
+	<< z_ << "\t" 
+	<< bend_ << "\t" << endl; 
 
     /*
 
@@ -143,6 +145,7 @@ public:
   double z() const { return z_; }
   double r() const { return sqrt(x_*x_+y_*y_); }
   double pt() const { return pt_; }
+  double bend() const { return bend_;}
 
   double phi() const { return atan2(y_,x_); }
 
@@ -191,6 +194,7 @@ private:
   double sigmax_;
   double sigmaz_;
   double pt_;
+  double bend_;
 
   vector<pair<int,int> > innerdigis_;
   vector<pair<int,int> > innerdigisladdermodule_;

@@ -233,7 +233,7 @@ public:
   }
 
 
-  bool addStub(int layer,int ladder,int module,double pt,
+  bool addStub(int layer,int ladder,int module,double pt,double bend,
 	   double x,double y,double z,
 	   vector<bool> innerStack,
 	   vector<int> irphi,
@@ -244,7 +244,7 @@ public:
     x-=x_offset;
     y-=y_offset;
 
-    L1TStub stub(-1,-1,-1,layer, ladder, module, x, y, z, -1.0, -1.0, pt);
+    L1TStub stub(-1,-1,-1,layer, ladder, module, x, y, z, -1.0, -1.0, pt, bend);
 
     for(unsigned int i=0;i<innerStack.size();i++){
       if (innerStack[i]) {
@@ -411,8 +411,9 @@ public:
       double x;
       double y;
       double z;
+      double bend;
 
-      in >> layer >> ladder >> module >> pt >> x >> y >> z;
+      in >> layer >> ladder >> module >> pt >> x >> y >> z >> bend;
 
       layer--;   
       x-=x_offset;
@@ -420,7 +421,7 @@ public:
 
       if (layer < 10) nlayer[layer]++;
 
-      L1TStub stub(-1,-1,-1,layer, ladder, module, x, y, z, -1.0, -1.0, pt);
+      L1TStub stub(-1,-1,-1,layer, ladder, module, x, y, z, -1.0, -1.0, pt, bend);
 
       in >> tmp;
 
